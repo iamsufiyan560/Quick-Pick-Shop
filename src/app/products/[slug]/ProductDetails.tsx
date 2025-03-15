@@ -1,9 +1,10 @@
 "use client";
 import Badge from "@/components/ui/badge";
 import WixImage from "@/components/WixImage";
-import { findVariant } from "@/lib/utils";
+import { checkInStock, findVariant } from "@/lib/utils";
 import { products } from "@wix/stores";
 import { useState } from "react";
+import ProductOptions from "./ProductOptions";
 
 interface ProductDetailsProps {
   product: products.Product;
@@ -22,7 +23,24 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
       ?.reduce((acc, curr) => ({ ...acc, ...curr }), {}) || {},
   );
 
+  console.log("selectedOptions", selectedOptions);
+
   const selectedVariant = findVariant(product, selectedOptions);
+
+  const inStock = checkInStock(product, selectedOptions);
+
+  const availableQuantity =
+    selectedVariant?.stock?.quantity ?? product.stock?.quantity;
+
+  const availableQuantityExceeded =
+    !!availableQuantity && quantity > availableQuantity;
+
+  const selectedOptionsMedia = product.productOptions?.flatMap((option) => {
+    const selectedChoice = option.choices?.find(
+      (choice) => choice.description === selectedOptions[option.name || ""],
+    );
+    return selectedChoice?.media?.items ?? [];
+  });
 
   return (
     <div className="flex flex-col gap-10 md:flex-row lg:gap-20">
@@ -50,6 +68,12 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             className="prose dark:prose-invert"
           />
         )}
+
+        <ProductOptions
+          product={product}
+          selectedOptions={selectedOptions}
+          setSelectedOptions={setSelectedOptions}
+        />
       </div>
     </div>
   );
