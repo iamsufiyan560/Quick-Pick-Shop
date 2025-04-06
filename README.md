@@ -1,36 +1,228 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
+# Modern E-Commerce Platform
 
-## Getting Started
+A beautiful and fast e-commerce website built with **Next.js 15** and **Wix Studio Headless APIs**.
 
-First, run the development server:
+## ✨ Features
+
+- **Blazing Fast Performance**: Leverages Next.js 15's server components and streaming for optimal loading speeds
+- **Responsive Design**: Looks great on all devices from mobile to desktop
+- **Complete E-Commerce Solution**: Includes everything an online store needs:
+  - Cart management
+  - Secure checkout process
+  - User account management
+  - Email automation
+  - Payment provider integration
+  - Order tracking
+  - Inventory management
+
+## 🚀 Technical Stack
+
+- **Frontend**: Next.js 15, React, Tailwind CSS
+- **Backend**: Wix Studio Headless APIs
+- **State Management**: React Context API with optimistic updates
+- **Styling**: Tailwind CSS with custom theming
+- **Authentication**: JWT-based auth with secure HTTP-only cookies
+- **Deployment**: Vercel
+
+## 💻 Best Practices Implemented
+
+- **Server-Side Rendering**: For improved SEO and performance
+- **URL State Management**: For shareable and bookmarkable pages
+- **Optimistic Updates**: For a snappy user experience
+- **Incremental Static Regeneration**: For dynamic content with static-like performance
+- **Responsive Images**: With Next.js Image optimization
+- **API Route Handlers**: For secure backend communication
+- **Error Boundary Implementation**: For graceful error handling
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js 18.0.0 or later
+- npm or yarn package manager
+- Wix Studio account with API access
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/iamsufiyan560/Quick-Pick-Shop.git
+
+# Navigate to the project directory
+cd ecommerce-platform
+
+# Install dependencies
+npm install
+# or
+yarn install
+
+# Set up environment variables
+cp .env.example .env.local
+```
+
+### Configuration
+
+1. Create a Wix Studio account and set up your store
+2. Generate API keys from your Wix dashboard
+3. Add the API keys to your `.env.local` file:
+
+```
+WIX_API_KEY=your_api_key_here
+WIX_SITE_ID=your_site_id_here
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+### Development
+
+```bash
+# Run the development server
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Building for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Inter, a custom Google Font.
+```bash
+# Build the application
+npm run build
+# or
+yarn build
 
-## Learn More
+# Start the production server
+npm start
+# or
+yarn start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📂 Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+/
+├── app/               # Next.js 15 app directory
+│   ├── api/           # API route handlers
+│   ├── (shop)/        # Shop routes grouped layout
+│   ├── account/       # User account pages
+│   ├── checkout/      # Checkout flow
+│   └── layout.tsx     # Root layout
+├── components/        # Reusable React components
+│   ├── ui/            # UI components (buttons, inputs, etc.)
+│   ├── products/      # Product-related components
+│   ├── cart/          # Shopping cart components
+│   └── checkout/      # Checkout components
+├── lib/               # Utility functions and shared logic
+│   ├── wix/           # Wix API client and helpers
+│   ├── auth/          # Authentication utilities
+│   └── hooks/         # Custom React hooks
+├── public/            # Static assets
+└── tailwind.config.js # Tailwind CSS configuration
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔄 API Integration
 
-## Deploy on Vercel
+The platform integrates with Wix Studio Headless APIs for:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Product Catalog**: Fetching and filtering products
+- **Inventory**: Real-time stock management
+- **Cart & Checkout**: Order processing
+- **User Management**: Authentication and profiles
+- **Content Management**: Dynamic pages and blog
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛒 E-Commerce Features
+
+### Product Catalog
+
+- Advanced filtering and search
+- Product variations (size, color, etc.)
+- Related products
+- Wishlist functionality
+
+### Shopping Cart
+
+- Real-time updates
+- Save for later
+- Discount code application
+- Tax calculation
+
+### Checkout Process
+
+- Guest checkout
+- Multiple payment methods
+- Address validation
+- Order summary
+
+### User Accounts
+
+- Order history
+- Saved addresses
+- Payment methods
+- Email preferences
+
+## 📱 Mobile Experience
+
+The platform is fully responsive and provides a native-like experience on mobile devices:
+
+- Touch-friendly interface
+- Optimized images for faster loading
+- Mobile-specific layouts
+- Bottom navigation for easy access
+
+## 🔒 Security
+
+- HTTPS-only deployment
+- CSRF protection
+- Input validation
+- Rate limiting
+- XSS prevention
+
+## 📈 Performance Optimization
+
+- Lighthouse score > 90 on all metrics
+- Core Web Vitals optimization
+- Code splitting
+- Image optimization
+- Font optimization
+- Third-party script management
+
+## 🧪 Testing
+
+```bash
+# Run unit tests
+npm run test
+# or
+yarn test
+
+# Run end-to-end tests
+npm run test:e2e
+# or
+yarn test:e2e
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👏 Acknowledgements
+
+- [Next.js](https://nextjs.org/) - The React Framework
+- [Wix Studio](https://www.wix.com/studio) - Headless CMS and E-commerce
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Vercel](https://vercel.com/) - Deployment platform
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📞 Support
+
+For questions and support, please open an issue in the GitHub repository or contact us at msufiyanhusen@gmail.com.
