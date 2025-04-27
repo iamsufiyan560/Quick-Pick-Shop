@@ -1,15 +1,15 @@
+import banner from "@/assets/banner.jpg";
+import Product from "@/components/Product";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { delay } from "@/lib/utils";
+import { getWixServerClient } from "@/lib/wix-client.server";
+import { getCollectionBySlug } from "@/wix-api/collections";
+import { queryProducts } from "@/wix-api/products";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import banner from "@/assets/banner.jpg";
-import { delay } from "@/lib/utils";
-import { getWixClient } from "@/lib/wix-client.base";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
-import Product from "@/components/Product";
-import { getCollectionBySlug } from "@/wix-api/collections";
-import { queryProducts } from "@/wix-api/products";
 
 export default function Home() {
   return (
@@ -32,7 +32,7 @@ export default function Home() {
         <div className="relative hidden h-full w-1/2 md:block">
           <Image
             src={banner}
-            alt=" Shop banner"
+            alt="Flow Shop banner"
             className="h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-secondary via-transparent to-transparent" />
@@ -48,12 +48,15 @@ export default function Home() {
 async function FeaturedProducts() {
   await delay(1000);
 
-  const collection = await getCollectionBySlug("featured-products");
+  const wixClient = getWixServerClient();
+
+  const collection = await getCollectionBySlug(wixClient, "featured-products");
 
   if (!collection?._id) {
     return null;
   }
-  const featuredProducts = await queryProducts({
+
+  const featuredProducts = await queryProducts(wixClient, {
     collectionIds: collection._id,
   });
 
@@ -69,7 +72,6 @@ async function FeaturedProducts() {
           <Product key={product._id} product={product} />
         ))}
       </div>
-      {/* <pre>{JSON.stringify(featuredProducts, null, 2)}</pre> */}
     </div>
   );
 }
