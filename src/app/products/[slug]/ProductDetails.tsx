@@ -17,6 +17,7 @@ import ProductMedia from "./ProductMedia";
 import ProductOptions from "./ProductOptions";
 import ProductPrice from "./ProductPrice";
 import AddToCartButton from "@/components/AddToCartButton";
+import BackInStockNotificationButton from "@/components/BackInStockNotificationButton";
 
 interface ProductDetailsProps {
   product: products.Product;
@@ -108,7 +109,11 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             quantity={quantity}
           />
         ) : (
-          "Out of stock"
+          <BackInStockNotificationButton
+            product={product}
+            selectedOptions={selectedOptions}
+            className="w-full"
+          />
         )}
 
         {!!product.additionalInfoSections?.length && (
