@@ -1,14 +1,19 @@
 import logo from "@/assets/logo.png";
 import { getWixServerClient } from "@/lib/wix-client.server";
 import { getCart } from "@/wix-api/cart";
+import UserButton from "@/components/UserButton";
+import { getLoggedInMember } from "@/wix-api/members";
 import Image from "next/image";
 import Link from "next/link";
 import ShoppingCartButton from "./ShoppingCartButton";
 
 export default async function Navbar() {
-  const cart = await getCart(getWixServerClient());
-  const totalQuantity =
-    cart?.lineItems.reduce((acc, item) => acc + (item.quantity || 0), 0) || 0;
+  const wixClient = getWixServerClient();
+
+  const [cart, loggedInMember] = await Promise.all([
+    getCart(wixClient),
+    getLoggedInMember(wixClient),
+  ]);
 
   return (
     <header className="bg-background shadow-sm">
@@ -17,7 +22,10 @@ export default async function Navbar() {
           <Image src={logo} alt="Quick Pick Shop logo" width={40} height={40} />
           <span className="text-xl font-bold">Quick Pick Shop</span>
         </Link>
-        <ShoppingCartButton initialData={cart} />
+        <div className="flex items-center justify-center gap-5">
+          <UserButton loggedInMember={loggedInMember} />
+          <ShoppingCartButton initialData={cart} />
+        </div>
       </div>
     </header>
   );
